@@ -1,4 +1,7 @@
 
+
+{{session.data.authenticated.username}}
+
 <table class = 'table table-striped table-condensed table-bordered'>
   <thead>
     <tr>
@@ -12,7 +15,7 @@
   <tbody>
     {{#each items as | item |}}
     <tr class = 'item' data-id= {{item.id}}>
-      <td>{{item.title}}</td>
+      <td>{{item.title}} <button data-id= {{item.id}}>Add To Cart</button></td>
       <td>{{item.price}}</td>
       <td>{{item.quantity}}</td>
       <td>{{item.unit}}</td>

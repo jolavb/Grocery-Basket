@@ -61,11 +61,36 @@ const GetStoreItems = function (storeId) {
   })
 }
 
+
+const addItemToCart = function (itemId) {
+  console.log(store.user.id)
+
+  let data = {
+    cart_item: {
+      user_id: store.user.id,
+      item_id: itemId
+    }
+  }
+
+  data = JSON.stringify(data)
+
+  return $.ajax({
+    method: 'POST',
+    url: config.apiOrigin + '/cart_items/',
+    contentType: 'application/json',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
   signout,
   GetStores,
-  GetStoreItems
+  GetStoreItems,
+  addItemToCart
 }

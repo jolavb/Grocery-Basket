@@ -4,7 +4,6 @@ const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
 
 const api = require('./api')
 
-
 const Success = (response) => {
 
 }
@@ -52,19 +51,36 @@ const GetStoreSuccess = (data) => {
   $('#content').html(showStoresHtml)
 
   // Register Event Handler for Store Click
-  $('#content').on('click', '.store', function (event) {
+  $('#content').on('click', '.store', function () {
     const store = $(this).attr('data-id')
-
     api.GetStoreItems(store)
-      .then(function (data) {
-        const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
-        $('#content').html(showStoreItemsHTML)
-        console.log(data)
-      })
-      .catch(function (response) {
-        console.log(response)
-      })
+    // Display items on success
+      .then(GetItemsSuccess)
+      .catch(GetItemsFail)
   })
+}
+
+const GetItemsSuccess = function (data) {
+  const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
+  $('#content').html(showStoreItemsHTML)
+  $('table').on('click', 'button', function () {
+    const item = $(this).attr('data-id')
+    api.addItemToCart(item)
+      .then(addItemSuccess)
+      .catch(addItemFail)
+  })
+}
+
+const GetItemsFail = function (response) {
+  console.log(GetItemsFail)
+}
+
+const addItemSuccess = function (response) {
+  console.log(response)
+}
+
+const addItemFail = function (response) {
+  console.log(response)
 }
 
 module.exports = {
