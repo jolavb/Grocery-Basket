@@ -2,6 +2,7 @@ const getFormFields = require('./../../../lib/get-form-fields')
 const api = require('./api.js')
 const ui = require('./ui.js')
 
+// Authentication Events
 const onRegistration = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
@@ -33,9 +34,17 @@ const onSignout = function (event) {
     .catch(ui.sigsnoutFail)
 }
 
+// Get Stores Event
+const OnGetStores = (event) => {
+  api.GetStores()
+    .then(ui.Success)
+    .catch(ui.Fail)
+}
+
 module.exports = {
   onRegistration,
   onSignIn,
   onChangePassword,
-  onSignout
+  onSignout,
+  OnGetStores
 }

@@ -45,9 +45,18 @@ const signout = function () {
   })
 }
 
+const GetStores = function () {
+  return $.ajax({
+    method: 'GET',
+    url: config.apiOrigin + '/stores/',
+    contentType: 'application/json'
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
-  signout
+  signout,
+  GetStores
 }

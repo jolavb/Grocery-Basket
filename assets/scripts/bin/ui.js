@@ -34,6 +34,17 @@ const signoutFail = function (response) {
 }
 
 
+const Success = (response) => {
+  console.log(response)
+}
+
+const Fail = (response) => {
+  console.log(response)
+}
+
+
+
+
 module.exports = {
   signUpSuccess,
   signUpFail,
@@ -42,5 +53,7 @@ module.exports = {
   changePassSuccess,
   changePassFail,
   signoutSuccess,
-  signoutFail
+  signoutFail,
+  Success,
+  Fail
 }
