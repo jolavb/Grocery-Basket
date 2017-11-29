@@ -1,6 +1,7 @@
 const store = require('./../store')
 const showStoresTemplate = require('../templates/store-listing.handlebars')
 const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
+const showCartTemplate = require('../templates/shopping-cart.handlebars')
 
 const api = require('./api')
 
@@ -50,23 +51,24 @@ const GetStoreSuccess = (data) => {
   const showStoresHtml = showStoresTemplate({ stores: data.stores })
   $('#content').html(showStoresHtml)
 
-  // Register Event Handler for Store Click
+  // Register Event Handler for Store Click that shows items for store
   $('#content').on('click', '.store', function () {
     const store = $(this).attr('data-id')
     api.GetStoreItems(store)
-    // Display items on success
       .then(GetItemsSuccess)
       .catch(GetItemsFail)
   })
 }
 
+// Display items on success
 const GetItemsSuccess = function (data) {
   const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
   $('#content').html(showStoreItemsHTML)
-  $('table').on('click', 'button', function () {
+  // Register event that adds items to cart on item list add click
+  $('.items').on('click', 'button', function () {
     const item = $(this).attr('data-id')
     api.addItemToCart(item)
-      .then(addItemSuccess)
+      .then(updateCartSuccess)
       .catch(addItemFail)
   })
 }
@@ -75,12 +77,34 @@ const GetItemsFail = function (response) {
   console.log(GetItemsFail)
 }
 
-const addItemSuccess = function (response) {
-  console.log(response)
+// Update Cart Items on success
+const updateCartSuccess = function (cartItems) {
+  console.log(cartItems)
+  const showCartHtml = showCartTemplate({ cartItems: cartItems.items })
+  $('#shopping-cart').html(showCartHtml)
+
+  // Calculate Total in cart
+  CalculateExpenses(cartItems)
+
+  // Register Remove from cart button events. On success invokes self.
+  $('.cart-items').on('click', 'button', function () {
+    const cartItem = $(this).attr('data-id')
+    api.removeCartItem(cartItem)
+      .then(updateCartSuccess)
+      .catch(RemoveItemFail)
+  })
 }
 
 const addItemFail = function (response) {
   console.log(response)
+}
+
+const RemoveItemFail = function (response) {
+  console.log(response)
+}
+
+const CalculateExpenses = function (cartItems) {
+  // console.log(JSON.parse(cartItems))
 }
 
 module.exports = {

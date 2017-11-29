@@ -61,10 +61,7 @@ const GetStoreItems = function (storeId) {
   })
 }
 
-
 const addItemToCart = function (itemId) {
-  console.log(store.user.id)
-
   let data = {
     cart_item: {
       user_id: store.user.id,
@@ -85,6 +82,17 @@ const addItemToCart = function (itemId) {
   })
 }
 
+const removeCartItem = function (itemId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: config.apiOrigin + '/cart_items/' + itemId,
+    contentType: 'application/json',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -92,5 +100,6 @@ module.exports = {
   signout,
   GetStores,
   GetStoreItems,
-  addItemToCart
+  addItemToCart,
+  removeCartItem
 }

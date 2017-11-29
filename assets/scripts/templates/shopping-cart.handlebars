@@ -1,0 +1,23 @@
+<table class = 'cart-items table table-striped table-condensed table-bordered'>
+  <thead>
+    <tr>
+      <td colspan='4'>Cart</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each cartItems as | item |}}
+    <tr class = 'cart-item' data-id= {{item.id}}>
+      <td> <button data-id = {{ item.id }}>Remove</button></td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.title }}</td>
+      <td>$ {{ item.price}}</td>
+    </tr>
+    {{/each}}
+    <tr>
+      <td colspan = '2'></td>
+      <td> Total </td>
+      <td id= 'cart-total'></td>
+    </tr>
+
+  </tbody>
+</table>
