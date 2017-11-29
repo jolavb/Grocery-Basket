@@ -37,7 +37,7 @@ const onSignout = function (event) {
 // Get Stores Event
 const OnGetStores = (event) => {
   api.GetStores()
-    .then(ui.Success)
+    .then(ui.GetStoreSuccess)
     .catch(ui.Fail)
 }
 

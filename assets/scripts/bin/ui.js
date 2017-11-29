@@ -1,4 +1,13 @@
 const store = require('./../store')
+const showStoresTemplate = require('../templates/store-listing.handlebars')
+
+const Success = (response) => {
+
+}
+
+const Fail = (response) => {
+  console.log(response)
+}
 
 const signUpSuccess = function (response) {
   console.log(response)
@@ -33,17 +42,11 @@ const signoutFail = function (response) {
   console.log(response)
 }
 
-
-const Success = (response) => {
-  console.log(response)
+const GetStoreSuccess = (data) => {
+  console.log(data)
+  const showStoresHtml = showStoresTemplate({ stores: data.stores })
+  $('#all-stores').html(showStoresHtml)
 }
-
-const Fail = (response) => {
-  console.log(response)
-}
-
-
-
 
 module.exports = {
   signUpSuccess,
@@ -55,5 +58,6 @@ module.exports = {
   signoutSuccess,
   signoutFail,
   Success,
-  Fail
+  Fail,
+  GetStoreSuccess
 }

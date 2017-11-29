@@ -14,34 +14,39 @@
 
     <body class="container-fluid">
 
-      <form id= 'sign-in'>
-        <legend> Sign In </legend>
-        <input name="credentials[email]" type='text' placeholder="email">
-        <input name="credentials[password]" type='password' placeholder="password">
-        <button type='submit'>Sign In</button>
-        <button type = 'button' id='register-link'>Register</button>
-      </form>
+  <section id='forms'>
+        <form id= 'sign-in'>
+          <legend> Sign In </legend>
+          <input name="credentials[email]" type='text' placeholder="email">
+          <input name="credentials[password]" type='password' placeholder="password">
+          <button type='submit'>Sign In</button>
+          <button type = 'button' id='register-link'>Register</button>
+        </form>
 
 
-      <form id='registration' class ='overlay-form'>
-        <legend> Register </legend>
-        <input name="credentials[email]" type= 'text' placeholder="email">
-        <input name="credentials[password]" type="password" placeholder="password">
-        <input name="credentials[password_confirmation]" type="password" placeholder="re-enter password">
-        <button class = 'submit' type='submit'>Register</button>
-      </form>
+        <form id='registration' class ='overlay-form'>
+          <legend> Register </legend>
+          <input name="credentials[email]" type= 'text' placeholder="email">
+          <input name="credentials[password]" type="password" placeholder="password">
+          <input name="credentials[password_confirmation]" type="password" placeholder="re-enter password">
+          <button class = 'submit' type='submit'>Register</button>
+        </form>
 
 
-      <form id='change-password'  class ='overlay-form '>
-       <legend> Change Password </legend>
-       <input name="passwords[old]" type='password' placeholder="old password">
-       <input name="passwords[new]" type='password' placeholder="new password">
-       <button id='change-pass-btn' type='submit'>Submit</button>
-       <button class = 'cancel' type='button'>Cancel</button>
-      </form>
+        <form id='change-password'  class ='overlay-form '>
+         <legend> Change Password </legend>
+         <input name="passwords[old]" type='password' placeholder="old password">
+         <input name="passwords[new]" type='password' placeholder="new password">
+         <button id='change-pass-btn' type='submit'>Submit</button>
+         <button class = 'cancel' type='button'>Cancel</button>
+        </form>
 
-      <button id='signout' type='button'>Log Out</button>
+        <button id='signout' type='button'>Log Out</button>
+  </section>
 
+  <section id='all-stores'>
+    <div class= 'store-listings'></div>
+  </section>
 
 
 
