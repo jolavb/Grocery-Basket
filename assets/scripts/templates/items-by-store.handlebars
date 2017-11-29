@@ -1,0 +1,23 @@
+
+<table class = 'table table-striped table-condensed table-bordered'>
+  <thead>
+    <tr>
+      <td><h3>Title</h3></td>
+      <td><h3>Price</h3></td>
+      <td><h3>Quantity</h3></td>
+      <td><h3>Unit</h3></td>
+      <td><h3>Image</h3></td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each items as | item |}}
+    <tr class = 'item' data-id= {{item.id}}>
+      <td>{{item.title}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.unit}}</td>
+      <td style='max-height: 50px'><img src= '{{item.image}}'/></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

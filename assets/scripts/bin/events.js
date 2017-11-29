@@ -35,16 +35,17 @@ const onSignout = function (event) {
 }
 
 // Get Stores Event
-const OnGetStores = (event) => {
+const onGetStores = (event) => {
   api.GetStores()
     .then(ui.GetStoreSuccess)
     .catch(ui.Fail)
 }
+
 
 module.exports = {
   onRegistration,
   onSignIn,
   onChangePassword,
   onSignout,
-  OnGetStores
+  onGetStores
 }

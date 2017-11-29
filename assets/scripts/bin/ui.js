@@ -1,5 +1,9 @@
 const store = require('./../store')
 const showStoresTemplate = require('../templates/store-listing.handlebars')
+const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
+
+const api = require('./api')
+
 
 const Success = (response) => {
 
@@ -43,9 +47,24 @@ const signoutFail = function (response) {
 }
 
 const GetStoreSuccess = (data) => {
-  console.log(data)
+  // Render Stores Template to content to display stores
   const showStoresHtml = showStoresTemplate({ stores: data.stores })
-  $('#all-stores').html(showStoresHtml)
+  $('#content').html(showStoresHtml)
+
+  // Register Event Handler for Store Click
+  $('#content').on('click', '.store', function (event) {
+    const store = $(this).attr('data-id')
+
+    api.GetStoreItems(store)
+      .then(function (data) {
+        const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
+        $('#content').html(showStoreItemsHTML)
+        console.log(data)
+      })
+      .catch(function (response) {
+        console.log(response)
+      })
+  })
 }
 
 module.exports = {

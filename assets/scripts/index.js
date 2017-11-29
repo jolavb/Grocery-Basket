@@ -13,7 +13,8 @@ $(() => {
   $('#signout').on('click', events.onSignout)
 
   // Load Stores Event
-  events.OnGetStores()
+  events.onGetStores()
+  // Register Get Store Events
 })
 
 // use require with a reference to bundle the file and use it in this file

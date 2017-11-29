@@ -53,10 +53,19 @@ const GetStores = function () {
   })
 }
 
+const GetStoreItems = function (storeId) {
+  return $.ajax({
+    method: 'GET',
+    url: config.apiOrigin + '/stores/' + storeId,
+    contentType: 'application/json'
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
   signout,
-  GetStores
+  GetStores,
+  GetStoreItems
 }
