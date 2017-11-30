@@ -1,0 +1,17 @@
+
+form {
+  > input {
+      display: block;
+      margin: 5px auto;
+      width: 50%;
+  }
+
+  > legend {
+    color: $white;
+  }
+}
+
+
+.nav-pills > li {
+  float: right;
+}

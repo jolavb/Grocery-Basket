@@ -12,38 +12,74 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
 
-    <body class="container-fluid">
+ <body class="container-fluid">
 
-  <div id = 'shopping-cart'></div>
-  <section id='forms'>
-        <form id= 'sign-in'>
-          <legend> Sign In </legend>
-          <input name="credentials[email]" type='text' placeholder="email">
-          <input name="credentials[password]" type='password' placeholder="password">
-          <button type='submit'>Sign In</button>
-          <button type = 'button' id='register-link'>Register</button>
-        </form>
+  <div class="modal fade">
+    <div class="modal-dialog" role="document">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <form class='registration'>
+            <label for="RegEmail">Email address</label>
+            <input id = 'RegEmail' class='form-control' name="credentials[email]" type= 'text' placeholder="email">
+            <label for="RegPass1">Password</label>
+            <input id = 'RegPass1' class='form-control' name="credentials[password]" type="password" placeholder="password">
+            <label for="RegPass2">Confirm Password</label>
+            <input id = "RegPass2" class='form-control' name="credentials[password_confirmation]" type="password" placeholder="re-enter password">
+            <button class = 'submit btn btn-primary' type='submit' >Sign Up</button>
+          </form>
+
+          <form class= 'sign-in'>
+            <label for='LogEmail'>Email address</label>
+            <input id = 'LogEmail' class='form-control' name="credentials[email]" type='text' placeholder="email">
+            <label for='LogPass'>Password</label>
+            <input id = 'LogPass' class='form-control' name="credentials[password]" type='password' placeholder="password">
+            <button class = 'btn btn-primary' type='submit'>Sign In</button>
+            <button id='registration' type='button' class ='modal-display nav-item btn btn-primary'>Sign Up</button>
+          </form>
+
+          <form class='change-password'>
+             <label for='oldPass'>Current Password</label>
+             <input id = 'oldPass' class='form-control' name="passwords[old]" type='password' placeholder="old password">
+             <label for='newPass'>Current Password</label>
+             <input id = 'newPass' name="passwords[new]" class='form-control' type='password' placeholder="new password">
+             <button class='btn btn-primary' id='change-pass-btn' type='submit'>Submit</button>
+          </form>
+          <div class='formerror alert alert-danger hidden' role="alert"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-pills navbar-right" role="tablist">
+    <!-- <button id='sign-in' class ='modal-display nav-item btn btn-primary'> Login </button> -->
+    <li role="presentation" class = 'dropdown'>
+      <a href='#'class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Cart <span class="badge items-count">0</span></a>
+      <div id = 'shopping-cart' class='dropdown-menu'></div>
+    </li>
 
 
-        <form id='registration' class ='overlay-form'>
-          <legend> Register </legend>
-          <input name="credentials[email]" type= 'text' placeholder="email">
-          <input name="credentials[password]" type="password" placeholder="password">
-          <input name="credentials[password_confirmation]" type="password" placeholder="re-enter password">
-          <button class = 'submit' type='submit'>Register</button>
-        </form>
 
+    <li class = 'dropdown' role="presentation">
+      <a href='#' id='sign-in' class ='modal-display' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+    </li>
+  </ul>
 
-        <form id='change-password'  class ='overlay-form '>
-         <legend> Change Password </legend>
-         <input name="passwords[old]" type='password' placeholder="old password">
-         <input name="passwords[new]" type='password' placeholder="new password">
-         <button id='change-pass-btn' type='submit'>Submit</button>
-         <button class = 'cancel' type='button'>Cancel</button>
-        </form>
+  <!-- <div id = 'shopping-cart dropdown-menu'></div> -->
 
-        <button id='signout' type='button'>Log Out</button>
-  </section>
   <div id='content'>
 
 
