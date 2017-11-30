@@ -13,7 +13,7 @@
     {{#each items as | item |}}
     <tr class = 'item' data-id= {{item.id}}>
       <td>{{item.title}} <button data-id= {{item.id}}>Add To Cart</button></td>
-      <td>{{item.price}}</td>
+      <td>${{item.price}}</td>
       <td>{{item.quantity}}</td>
       <td>{{item.unit}}</td>
       <td style='max-height: 50px'><img src= '{{item.image}}'/></td>

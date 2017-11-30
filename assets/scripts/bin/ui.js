@@ -3,6 +3,26 @@ const showStoresTemplate = require('../templates/store-listing.handlebars')
 const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
 const showCartTemplate = require('../templates/shopping-cart.handlebars')
 
+const showError = function (msg) {
+  $('.formerror').html(msg)
+  $('.formerror').removeClass('hidden')
+}
+
+const showModal = function (formClass) {
+  const targetForm = $('.' + formClass)
+  const formtitle = {
+    'registration': 'Sign Up',
+    'sign-in': 'Sign In',
+    'change-password': 'Change Pasword'
+  }
+  $('.formerror').addClass('hidden')
+  $('form').hide()
+  $('.modal-title').html(formtitle[formClass])
+
+  targetForm.show()
+  $('.modal').modal('show')
+}
+
 const api = require('./api')
 
 const Success = (response) => {
@@ -14,28 +34,28 @@ const Fail = (response) => {
 }
 
 const signUpSuccess = function (response) {
-  console.log(response)
+  showModal('sign-in')
 }
 
 const signUpFail = function (response) {
-  console.log(response)
+  showError('Error Signing Up')
 }
 
 const signInSuccess = function (response) {
-  console.log(response)
   store.user = response.user
+  $('.modal').modal('hide')
 }
 
 const signInFail = function (response) {
-  console.log(response)
+  showError('Error Signing In')
 }
 
 const changePassSuccess = function (response) {
-  console.log(response)
+  $('.formerror').html('Error changing passwords')
 }
 
 const changePassFail = function (response) {
-  console.log(response)
+  showError('Error changing passwords')
 }
 
 const signoutSuccess = function (response) {
@@ -43,7 +63,7 @@ const signoutSuccess = function (response) {
 }
 
 const signoutFail = function (response) {
-  console.log(response)
+  $('.formerror').html('Error Signing out')
 }
 
 const GetStoreSuccess = (data) => {
@@ -79,7 +99,7 @@ const GetItemsFail = function (response) {
 
 // Update Cart Items on success
 const updateCartSuccess = function (cartItems) {
-  console.log(cartItems)
+  $('.items-count').html(cartItems.items.length)
   const showCartHtml = showCartTemplate({ cartItems: cartItems.items })
   $('#shopping-cart').html(showCartHtml)
 
@@ -107,6 +127,7 @@ const CalculateExpenses = function (cartItems) {
   // console.log(JSON.parse(cartItems))
 }
 
+
 module.exports = {
   signUpSuccess,
   signUpFail,
@@ -118,5 +139,6 @@ module.exports = {
   signoutFail,
   Success,
   Fail,
-  GetStoreSuccess
+  GetStoreSuccess,
+  showModal
 }

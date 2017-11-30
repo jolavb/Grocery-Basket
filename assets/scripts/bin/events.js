@@ -3,6 +3,10 @@ const api = require('./api.js')
 const ui = require('./ui.js')
 
 // Authentication Events
+const onModal = (event) => {
+  ui.showModal(event.target.id)
+}
+
 const onRegistration = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
@@ -41,11 +45,11 @@ const onGetStores = (event) => {
     .catch(ui.Fail)
 }
 
-
 module.exports = {
   onRegistration,
   onSignIn,
   onChangePassword,
   onSignout,
-  onGetStores
+  onGetStores,
+  onModal
 }
