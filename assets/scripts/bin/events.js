@@ -33,6 +33,12 @@ const onChangePassword = function (event) {
 
 const onSignout = function (event) {
   event.preventDefault()
+// Delete Users Current Cart Items
+  api.removeAllCartItems()
+    .then(ui.updateCartSuccess)
+    .catch(ui.Success)
+
+// Signout User
   api.signout()
     .then(ui.signoutSuccess)
     .catch(ui.sigsnoutFail)

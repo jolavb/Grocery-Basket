@@ -146,6 +146,7 @@ const GetItemsFail = function (response) {
 
 // Update Cart Items on success
 const updateCartSuccess = function (cartItems) {
+  console.log('hello')
   $('.items-count').html(cartItems.items.length)
   const showCartHtml = showCartTemplate({ cartItems: cartItems.items })
   $('#shopping-cart').html(showCartHtml)
@@ -190,5 +191,6 @@ module.exports = {
   Fail,
   GetStoreSuccess,
   showModal,
-  showCartModal
+  showCartModal,
+  updateCartSuccess
 }

@@ -1,9 +1,6 @@
 
 
  <!-- Developers, why are we using data-id and not just id? -->
-
-{{session.data.authenticated.username}}
-
  <table class = 'table table-striped table-condensed table-bordered'>
    <thead>
      <tr>
@@ -11,6 +8,7 @@
        <td><h3>Location</h3></td>
      </tr>
    </thead>
+
    <tbody>
      {{#each stores as |store|}}
      <tr class = 'store' data-id= {{store.id}}>

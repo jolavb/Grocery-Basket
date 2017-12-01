@@ -96,6 +96,17 @@ const removeCartItem = function (itemId) {
   })
 }
 
+const removeAllCartItems = function () {
+  return $.ajax({
+    method: 'DELETE',
+    url: config.apiOrigin + '/cart_items/',
+    contentType: 'application/json',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -104,5 +115,6 @@ module.exports = {
   GetStores,
   GetStoreItems,
   addItemToCart,
-  removeCartItem
+  removeCartItem,
+  removeAllCartItems
 }

@@ -22,3 +22,12 @@ form {
   top: 10px;
   z-index: 99;
 }
+
+.item-photo {
+  text-align: center;
+
+  > img {
+    max-width: 100%,;
+    max-width: 100%;
+  }
+}
