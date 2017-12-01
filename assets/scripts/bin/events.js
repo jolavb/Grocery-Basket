@@ -39,10 +39,14 @@ const onSignout = function (event) {
 }
 
 // Get Stores Event
-const onGetStores = (event) => {
+const onGetStores = () => {
   api.GetStores()
     .then(ui.GetStoreSuccess)
     .catch(ui.Fail)
+}
+
+const onCartModal = function () {
+  ui.showCartModal()
 }
 
 module.exports = {
@@ -51,5 +55,6 @@ module.exports = {
   onChangePassword,
   onSignout,
   onGetStores,
-  onModal
+  onModal,
+  onCartModal
 }

@@ -15,3 +15,9 @@ form {
 .nav-pills > li {
   float: right;
 }
+
+.navbar-right {
+  position: sticky;
+  top: 10px;
+  z-index: 99;
+}

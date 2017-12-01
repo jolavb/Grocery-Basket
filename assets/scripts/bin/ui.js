@@ -1,4 +1,5 @@
 const store = require('./../store')
+const api = require('./api')
 const showStoresTemplate = require('../templates/store-listing.handlebars')
 const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
 const showCartTemplate = require('../templates/shopping-cart.handlebars')
@@ -21,10 +22,12 @@ const showModal = function (formClass) {
   $('.modal-title').html(formtitle[formClass])
 
   targetForm.show()
-  $('.modal').modal('show')
+  $('.auth').modal('show')
 }
 
-const api = require('./api')
+const showCartModal = function() {
+  $('.cart').modal('show')
+}
 
 const Success = (response) => {
 
@@ -142,5 +145,6 @@ module.exports = {
   Success,
   Fail,
   GetStoreSuccess,
-  showModal
+  showModal,
+  showCartModal
 }

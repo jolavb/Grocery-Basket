@@ -13,7 +13,8 @@ $(() => {
   $('.signout').on('click', events.onSignout)
 
   // Register Event to Show Form Modal
-  $('.modal-display').on('click', events.onModal)
+  $('.auth-modal').on('click', events.onModal)
+  $('.cart-modal').on('click', events.onCartModal)
 
   // Load Stores Event
   events.onGetStores()
