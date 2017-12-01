@@ -1,23 +1,24 @@
 
-<table class = 'items table table-striped table-condensed table-bordered'>
-  <thead>
-    <tr>
-      <td><h3>Title</h3></td>
-      <td><h3>Price</h3></td>
-      <td><h3>Quantity</h3></td>
-      <td><h3>Unit</h3></td>
-      <td><h3>Image</h3></td>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each items as | item |}}
-    <tr class = 'item' data-id= {{item.id}}>
-      <td>{{item.title}} <button data-id= {{item.id}}>Add To Cart</button></td>
-      <td>${{item.price}}</td>
-      <td>{{item.quantity}}</td>
-      <td>{{item.unit}}</td>
-      <td style='max-height: 50px'><img src= '{{item.image}}'/></td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+
+<div class = 'row items'>
+  {{#each items as | item |}}
+
+  <div class='col-md-3'>
+      <div class="item panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">{{ item.title }}</h2>
+          ${{item.price}} for {{item.quantity}}
+
+        </div>
+        <div class='item-photo'>
+          <img src="{{ item.image }}" height="200">
+        </div>
+        </a>
+        <button data-id="{{ item.id }}"
+        class="btn btn-mini btn-danger glyphicon glyphicon-plus"
+        type="button">
+      </button>
+      </div>
+    </div>
+  {{/each}}
+  </div>

@@ -3,6 +3,7 @@ const showStoresTemplate = require('../templates/store-listing.handlebars')
 const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
 const showCartTemplate = require('../templates/shopping-cart.handlebars')
 
+
 const showError = function (msg) {
   $('.formerror').html(msg)
   $('.formerror').removeClass('hidden')
@@ -126,6 +127,7 @@ const RemoveItemFail = function (response) {
 const CalculateExpenses = function (cartItems) {
   // console.log(JSON.parse(cartItems))
 }
+
 
 
 module.exports = {
