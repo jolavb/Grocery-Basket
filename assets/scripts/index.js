@@ -15,7 +15,6 @@ $(() => {
   // Register Event to Show Form Modal
   $('.auth-modal').on('click', events.onModal)
   $('.cart-modal').on('click', events.onCartModal)
-
   // Load Stores Event
   events.onGetStores()
 })

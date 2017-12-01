@@ -1,6 +1,3 @@
-
-
-
 form {
   > input {
       display: block;
@@ -31,3 +28,7 @@ form {
     max-width: 100%;
   }
 }
+
+.store:hover {
+    background-color: yellow;
+  }

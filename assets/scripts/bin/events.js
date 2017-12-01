@@ -63,5 +63,5 @@ module.exports = {
   onSignout,
   onGetStores,
   onModal,
-  onCartModal
+  onCartModal,
 }
