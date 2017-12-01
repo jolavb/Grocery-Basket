@@ -18,7 +18,6 @@ $(() => {
 
   // Load Stores Event
   events.onGetStores()
-  // Register Get Store Events
 })
 
 // use require with a reference to bundle the file and use it in this file

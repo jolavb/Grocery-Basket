@@ -1,25 +1,28 @@
 const store = require('./../store')
 const api = require('./api')
+
+// Handlebars Templates
 const showStoresTemplate = require('../templates/store-listing.handlebars')
 const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
 const showCartTemplate = require('../templates/shopping-cart.handlebars')
 
-
+// Auth Modal Form Error
 const showError = function (msg) {
-  $('.formerror').html(msg)
-  $('.formerror').removeClass('hidden')
+  $('.formerror-auth').html(msg)
+  $('.formerror-auth').removeClass('hidden')
 }
 
 const showModal = function (formClass) {
+  // FormClass is ID of event button
   const targetForm = $('.' + formClass)
   const formtitle = {
     'registration': 'Sign Up',
     'sign-in': 'Sign In',
     'change-password': 'Change Pasword'
   }
-  $('.formerror').addClass('hidden')
+  $('.formerror-auth').addClass('hidden')
   $('form').hide()
-  $('.modal-title').html(formtitle[formClass])
+  $('.modal-title-auth').html(formtitle[formClass])
 
   targetForm.show()
   $('.auth').modal('show')
@@ -48,6 +51,16 @@ const signUpFail = function (response) {
 const signInSuccess = function (response) {
   store.user = response.user
   $('.modal').modal('hide')
+
+  // Initialize Empty Cart
+  const showCartHtml = showCartTemplate()
+  $('.formerror-cart').addClass('hidden')
+  $('#shopping-cart').html(showCartHtml)
+
+  // Update NavBar
+  $('.navbar-text').text('signed in as: ' + store.user.email)
+  $('#sign-out').removeClass('hidden')
+  $('#sign-in').addClass('hidden')
 }
 
 const signInFail = function (response) {
@@ -63,7 +76,10 @@ const changePassFail = function (response) {
 }
 
 const signoutSuccess = function (response) {
-  console.log(response)
+  $('.navbar-text').text('')
+  $('#sign-in').removeClass('hidden')
+  $('#sign-out').addClass('hidden')
+  showModal('sign-in')
 }
 
 const signoutFail = function (response) {
@@ -90,11 +106,38 @@ const GetItemsSuccess = function (data) {
   $('#content').html(showStoreItemsHTML)
   // Register event that adds items to cart on item list add click
   $('.items').on('click', 'button', function () {
-    const item = $(this).attr('data-id')
-    api.addItemToCart(item)
-      .then(updateCartSuccess)
-      .catch(addItemFail)
+    const cartItem = $(this).attr('data-id')
+    // if Item has been added to cart remove from cart
+    const removed = changeCartGlyph(this)
+    if (removed) {
+      $(this).removeClass('glyphicon-minus')
+      api.removeCartItem(cartItem)
+        .then(updateCartSuccess)
+        .catch(RemoveItemFail)
+    } else {
+      api.addItemToCart(cartItem)
+        .then(updateCartSuccess)
+        .catch(addItemFail)
+    }
   })
+}
+
+// Check if list item has already been added and changes
+// item glyph. Returns true if item has already been added.
+const changeCartGlyph = function (item) {
+  if ($(item).hasClass('glyphicon-minus')) {
+    $(item).removeClass('glyphicon-minus')
+    $(item).removeClass('btn-danger')
+    $(item).addClass('btn-success')
+    $(item).addClass('glyphicon-plus')
+    return true
+  } else {
+    $(item).removeClass('glyphicon-minus')
+    $(item).removeClass('btn-success')
+    $(item).addClass('btn-danger')
+    $(item).addClass('glyphicon-minus')
+    return false
+  }
 }
 
 const GetItemsFail = function (response) {
@@ -118,6 +161,7 @@ const updateCartSuccess = function (cartItems) {
       .catch(RemoveItemFail)
   })
 }
+
 
 const addItemFail = function (response) {
   console.log(response)

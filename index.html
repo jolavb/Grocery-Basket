@@ -14,12 +14,51 @@
 
  <body class="container-fluid">
 
+<nav class="navbar navbar-default">
+ <div class="container-fluid">
+   <div class="navbar-header">
+     <a class="navbar-brand" href="#">
+       <img alt="Grocery-Basket" src="...">
+     </a>
+   </div>
+
+   <ul class="nav navbar-nav">
+        <button href='#' id='sign-in' class ='modal-display auth-modal btn btn-default navbar-btn'>Login</button>
+        <button href='#' id='sign-out' class ='signout btn btn-default navbar-btn hidden'>Log Out</button>
+    </ul>
+
+   <ul class="nav nav-pills navbar-right" role="tablist">
+      <li role="presentation">
+        <a href='#'class="cart-modal">My Cart <span class="badge items-count">0</span></a>
+      </li>
+      <p class="navbar-text"></p>
+    </ul>
+
+ </div>
+</nav>
+
+<!-- Right aligned navbar -->
+  <!-- <ul class="nav nav-pills navbar-right" role="tablist">
+     <li role="presentation">
+       <a href='#'class="cart-modal">My Cart <span class="badge items-count">0</span></a>
+     </li>
+
+     <li role="presentation">
+       <a href='#' id='sign-in' class ='modal-display auth-modal'>Login</a>
+     </li>
+   </ul> -->
+
+ <!-- <div id = 'shopping-cart dropdown-menu'></div> -->
+
+ <div id='content' class='container'>
+ </div>
+<!-- Modal for displaying authorization forms -->
   <div class="modal fade auth">
     <div class="modal-dialog" role="document">
 
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"></h5>
+          <h5 class="modal-title modal-title-auth"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -43,7 +82,7 @@
             <label for='LogPass'>Password</label>
             <input id = 'LogPass' class='form-control' name="credentials[password]" type='password' placeholder="password">
             <button class = 'btn btn-primary' type='submit'>Sign In</button>
-            <button id='registration' type='button' class ='modal-display nav-item btn btn-primary'>Sign Up</button>
+            <button id='registration' type='button' class ='modal-display auth-modal nav-item btn btn-primary'>Sign Up</button>
           </form>
 
           <form class='change-password'>
@@ -53,7 +92,7 @@
              <input id = 'newPass' name="passwords[new]" class='form-control' type='password' placeholder="new password">
              <button class='btn btn-primary' id='change-pass-btn' type='submit'>Submit</button>
           </form>
-          <div class='formerror alert alert-danger' role="alert"></div>
+          <div class='formerror formerror-auth alert alert-danger' role="alert"></div>
         </div>
 
         <div class="modal-footer">
@@ -63,7 +102,7 @@
       </div>
     </div>
   </div>
-
+<!-- Modal for displaying cart items -->
   <div class="modal fade cart">
     <div class="modal-dialog" role="document">
 
@@ -77,7 +116,9 @@
 
         <div class="modal-body">
           <div id = 'shopping-cart'></div>
-          <div class='formerror alert alert-danger' role="alert"></div>
+          <div class='formerror formerror-cart alert alert-danger' role="alert">
+            <p>Please Sign in to Add Items to Cart</p>
+          </div>
         </div>
 
         <div class="modal-footer">
@@ -88,21 +129,6 @@
     </div>
   </div>
 
-  <ul class="nav nav-pills navbar-right" role="tablist">
-
-    <li role="presentation">
-      <a href='#'class="cart-modal">My Cart <span class="badge items-count">0</span></a>
-    </li>
-
-    <li role="presentation">
-      <a href='#' id='sign-in' class ='modal-display auth-modal'>Login</a>
-    </li>
-  </ul>
-
-  <!-- <div id = 'shopping-cart dropdown-menu'></div> -->
-
-  <div id='content' class='container'>
-  </div>
 
     </body>
 </html>

@@ -1,6 +1,7 @@
 const config = require('../config.js')
 const store = require('./../store')
 
+// Auth API Calls
 const signUp = function (data) {
   data = JSON.stringify(data)
   return $.ajax({
@@ -45,6 +46,7 @@ const signout = function () {
   })
 }
 
+// Store API Calls
 const GetStores = function () {
   return $.ajax({
     method: 'GET',
@@ -53,6 +55,7 @@ const GetStores = function () {
   })
 }
 
+// Items API Calls
 const GetStoreItems = function (storeId) {
   return $.ajax({
     method: 'GET',

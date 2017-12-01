@@ -38,13 +38,14 @@ const onSignout = function (event) {
     .catch(ui.sigsnoutFail)
 }
 
-// Get Stores Event
+// Stores Events
 const onGetStores = () => {
   api.GetStores()
     .then(ui.GetStoreSuccess)
     .catch(ui.Fail)
 }
 
+// Cart Events
 const onCartModal = function () {
   ui.showCartModal()
 }
