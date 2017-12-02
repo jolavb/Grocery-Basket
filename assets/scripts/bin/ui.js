@@ -179,7 +179,7 @@ const updateCartSuccess = function (cartItems) {
     api.removeCartItem(cartItem)
       .then(
         updateCartSuccess,
-        changeItemGlyph('[data-id=' + cartItem + ']')
+        changeItemGlyph('.panel button[data-id=' + cartItem + ']')
       )
       .catch(RemoveItemFail)
   })
