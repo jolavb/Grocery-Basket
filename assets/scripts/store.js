@@ -1,6 +1,6 @@
 'use strict'
 
-const store = {
+let store = {
 }
 
 module.exports = store

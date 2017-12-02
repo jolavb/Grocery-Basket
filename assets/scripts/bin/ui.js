@@ -12,6 +12,7 @@ const showError = function (msg) {
   $('.formerror-auth').removeClass('hidden')
 }
 
+// Auth Modal Controls
 const showModal = function (formClass) {
   // FormClass is ID of event button
   const targetForm = $('.' + formClass)
@@ -28,7 +29,8 @@ const showModal = function (formClass) {
   $('.auth').modal('show')
 }
 
-const showCartModal = function() {
+// Cart Modal Controls
+const showCartModal = function () {
   $('.cart').modal('show')
 }
 
@@ -61,6 +63,7 @@ const signInSuccess = function (response) {
   $('.navbar-text').text('signed in as: ' + store.user.email)
   $('#sign-out').removeClass('hidden')
   $('#sign-in').addClass('hidden')
+  CheckAuth()
 }
 
 const signInFail = function (response) {
@@ -79,7 +82,10 @@ const signoutSuccess = function (response) {
   $('.navbar-text').text('')
   $('#sign-in').removeClass('hidden')
   $('#sign-out').addClass('hidden')
+  store.user = false
   showModal('sign-in')
+  changeItemGlyph('.item-btn', true)
+  CheckAuth()
 }
 
 const signoutFail = function (response) {
@@ -108,7 +114,7 @@ const GetItemsSuccess = function (data) {
   $('.items').on('click', 'button', function () {
     const cartItem = $(this).attr('data-id')
     // if Item has been added to cart remove from cart
-    const removed = changeCartGlyph(this)
+    const removed = changeItemGlyph(this)
     if (removed) {
       $(this).removeClass('glyphicon-minus')
       api.removeCartItem(cartItem)
@@ -120,23 +126,37 @@ const GetItemsSuccess = function (data) {
         .catch(addItemFail)
     }
   })
+  // Hide or Display Add Items Image Buttons depending on Auth Status
+  CheckAuth()
 }
 
 // Check if list item has already been added and changes
 // item glyph. Returns true if item has already been added.
-const changeCartGlyph = function (item) {
-  if ($(item).hasClass('glyphicon-minus')) {
-    $(item).removeClass('glyphicon-minus')
-    $(item).removeClass('btn-danger')
-    $(item).addClass('btn-success')
-    $(item).addClass('glyphicon-plus')
-    return true
+const changeItemGlyph = function (item, reset) {
+  // Resets All Glyphs to plus
+  if (reset) {
+    if ($(item).hasClass('glyphicon-minus')) {
+      $(item).removeClass('glyphicon-minus')
+      $(item).removeClass('btn-danger')
+      $(item).addClass('btn-success')
+      $(item).addClass('glyphicon-plus')
+    }
   } else {
-    $(item).removeClass('glyphicon-minus')
-    $(item).removeClass('btn-success')
-    $(item).addClass('btn-danger')
-    $(item).addClass('glyphicon-minus')
-    return false
+    // Alternate Glyph between minus and plus
+    if ($(item).hasClass('glyphicon-minus')) {
+      $(item).removeClass('glyphicon-minus')
+      $(item).removeClass('btn-danger')
+      $(item).addClass('btn-success')
+      $(item).addClass('glyphicon-plus')
+      return true
+    } else {
+      console.log(item)
+      $(item).removeClass('glyphicon-minus')
+      $(item).removeClass('btn-success')
+      $(item).addClass('btn-danger')
+      $(item).addClass('glyphicon-minus')
+      return false
+    }
   }
 }
 
@@ -146,9 +166,8 @@ const GetItemsFail = function (response) {
 
 // Update Cart Items on success
 const updateCartSuccess = function (cartItems) {
-  console.log('hello')
-  $('.items-count').html(cartItems.items.length)
-  const showCartHtml = showCartTemplate({ cartItems: cartItems.items })
+  $('.items-count').html(cartItems.cart_items.length)
+  const showCartHtml = showCartTemplate({ cartItems: cartItems.cart_items })
   $('#shopping-cart').html(showCartHtml)
 
   // Calculate Total in cart
@@ -163,7 +182,6 @@ const updateCartSuccess = function (cartItems) {
   })
 }
 
-
 const addItemFail = function (response) {
   console.log(response)
 }
@@ -176,7 +194,13 @@ const CalculateExpenses = function (cartItems) {
   // console.log(JSON.parse(cartItems))
 }
 
-
+const CheckAuth = function () {
+  if (store.user) {
+    $('.item-btn').show()
+  } else {
+    $('.item-btn').hide()
+  }
+}
 
 module.exports = {
   signUpSuccess,

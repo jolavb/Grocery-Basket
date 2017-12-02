@@ -68,7 +68,8 @@ const addItemToCart = function (itemId) {
   let data = {
     cart_item: {
       user_id: store.user.id,
-      item_id: itemId
+      item_id: itemId,
+      quantity: '1'
     }
   }
 
@@ -99,7 +100,7 @@ const removeCartItem = function (itemId) {
 const removeAllCartItems = function () {
   return $.ajax({
     method: 'DELETE',
-    url: config.apiOrigin + '/cart_items/',
+    url: config.apiOrigin + '/cart_items_clear/',
     contentType: 'application/json',
     headers: {
       Authorization: 'Token token=' + store.user.token
