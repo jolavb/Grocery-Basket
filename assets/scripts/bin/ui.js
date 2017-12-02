@@ -177,7 +177,10 @@ const updateCartSuccess = function (cartItems) {
   $('.cart-items').on('click', 'button', function () {
     const cartItem = $(this).attr('data-id')
     api.removeCartItem(cartItem)
-      .then(updateCartSuccess)
+      .then(
+        updateCartSuccess,
+        changeItemGlyph('[data-id=' + cartItem + ']')
+      )
       .catch(RemoveItemFail)
   })
 }
