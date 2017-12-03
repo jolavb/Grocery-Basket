@@ -174,7 +174,7 @@ const updateCartSuccess = function (cartItems) {
   CalculateExpenses(cartItems)
 
   // Register Remove from cart button events. On success invokes self.
-  $('.cart-items').on('click', 'button', function () {
+  $('.cart-items').on('click', '.cart-btn-remove', function () {
     const cartItem = $(this).attr('data-id')
     api.removeCartItem(cartItem)
       .then(
@@ -182,6 +182,21 @@ const updateCartSuccess = function (cartItems) {
         changeItemGlyph('.panel button[data-id=' + cartItem + ']')
       )
       .catch(RemoveItemFail)
+  })
+
+  // Register Add from cart button events. On success invokes self.
+  $('.cart-items').on('click', '.cart-btn-add', function () {
+    const cartItem = $(this)
+    const quantity = parseInt($(this).siblings('p').text()) + 1
+
+    api.addCartItemQuantity(cartItem.attr('data-id'), quantity)
+      .then(
+        function (response) {
+          cartItem.siblings('p').text(response.cart_item.quantity)
+          console.log(response)
+        }
+      )
+      .catch(function (response) { console.log(response) })
   })
 }
 

@@ -97,6 +97,26 @@ const removeCartItem = function (itemId) {
   })
 }
 
+const addCartItemQuantity = function (itemId, quantity) {
+  let data = {
+    cart_item: {
+      quantity: quantity
+    }
+  }
+
+  data = JSON.stringify(data)
+
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiOrigin + '/cart_items/' + itemId,
+    contentType: 'application/json',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 const removeAllCartItems = function () {
   return $.ajax({
     method: 'DELETE',
@@ -118,5 +138,6 @@ module.exports = {
   GetStoreItems,
   addItemToCart,
   removeCartItem,
-  removeAllCartItems
+  removeAllCartItems,
+  addCartItemQuantity
 }
