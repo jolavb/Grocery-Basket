@@ -1,5 +1,6 @@
 const store = require('./../store')
 const api = require('./api')
+const events = require('./events')
 
 // Handlebars Templates
 const showStoresTemplate = require('../templates/store-listing.handlebars')
@@ -60,18 +61,26 @@ const signInSuccess = function (response) {
   $('#shopping-cart').html(showCartHtml)
 
   // Update NavBar
-  $('.navbar-text').text('signed in as: ' + store.user.email)
-  $('#sign-out').removeClass('hidden')
+  $('.username').prepend('signed in as: ' + store.user.email)
+  $('.auth-menu').removeClass('hidden')
   $('#sign-in').addClass('hidden')
   CheckAuth()
 }
 
 const signInFail = function (response) {
-  showError('Error Signing In')
+  showError('Error Signing In :(')
 }
 
 const changePassSuccess = function (response) {
-  $('.formerror').html('Error changing passwords')
+// Delete Users Current Cart Items
+  api.removeAllCartItems()
+    .then(updateCartSuccess)
+    .catch(Success)
+
+// Signout User
+  api.signout()
+    .then(signoutSuccess)
+    .catch(signoutFail)
 }
 
 const changePassFail = function (response) {
@@ -79,9 +88,9 @@ const changePassFail = function (response) {
 }
 
 const signoutSuccess = function (response) {
-  $('.navbar-text').text('')
+  $('.username').html('<span class="caret"></span>')
   $('#sign-in').removeClass('hidden')
-  $('#sign-out').addClass('hidden')
+  $('.auth-menu').addClass('hidden')
   store.user = false
   showModal('sign-in')
   changeItemGlyph('.item-btn', true)
@@ -100,6 +109,7 @@ const GetStoreSuccess = (data) => {
   // Register Event Handler for Store Click that shows items for store
   $('#content').on('click', '.store', function () {
     const store = $(this).attr('data-id')
+    loader(true)
     api.GetStoreItems(store)
       .then(GetItemsSuccess)
       .catch(GetItemsFail)
@@ -109,7 +119,16 @@ const GetStoreSuccess = (data) => {
 // Display items on success
 const GetItemsSuccess = function (data) {
   const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
-  $('#content').html(showStoreItemsHTML)
+
+  // Render Store Items
+  $('.items-view').remove()
+  $('#content').append(showStoreItemsHTML)
+
+  // Reigster Display Stores Event for Nav Links
+  $('.display-stores').on('click', function () { switchView('.store-view') })
+  // Turn Off Loader and Switch Views
+  loader(false, '.items-view')
+
   // Register event that adds items to cart on item list add click
   $('.items').on('click', 'button', function () {
     const cartItem = $(this).attr('data-id')
@@ -128,10 +147,23 @@ const GetItemsSuccess = function (data) {
   })
   // Hide or Display Add Items Image Buttons depending on Auth Status
   CheckAuth()
+  // Initilize Add Items Image Buttons if items added to cart
+  CheckItems(data)
 }
 
 // Check if list item has already been added and changes
 // item glyph. Returns true if item has already been added.
+// Adresses addding and removing items from different stores
+const CheckItems = function (items) {
+  $('.cart-btn-remove').each(function (index, element) {
+    const cartItemId = element.getAttribute('data-id')
+    const item = $('.panel button[data-id=' + cartItemId + ']')
+    if (item) {
+      changeItemGlyph('.panel button[data-id=' + cartItemId + ']')
+    }
+  })
+}
+
 const changeItemGlyph = function (item, reset) {
   // Resets All Glyphs to plus
   if (reset) {
@@ -150,7 +182,6 @@ const changeItemGlyph = function (item, reset) {
       $(item).addClass('glyphicon-plus')
       return true
     } else {
-      console.log(item)
       $(item).removeClass('glyphicon-minus')
       $(item).removeClass('btn-success')
       $(item).addClass('btn-danger')
@@ -220,6 +251,23 @@ const CheckAuth = function () {
   }
 }
 
+// Show/Hide Loader
+const loader = function (show, target) {
+  if (!show) {
+    $('#loader').hide()
+    switchView(target)
+  } else {
+    $('#loader').show()
+    $('#content').hide()
+  }
+}
+
+const switchView = function (target) {
+  $('.main-view').hide()
+  $('#content').show()
+  $(target).show()
+}
+
 module.exports = {
   signUpSuccess,
   signUpFail,
@@ -234,5 +282,6 @@ module.exports = {
   GetStoreSuccess,
   showModal,
   showCartModal,
-  updateCartSuccess
+  updateCartSuccess,
+  loader
 }

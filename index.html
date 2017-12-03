@@ -14,31 +14,47 @@
 
  <body class="container-fluid">
 
+
   <!-- Navbar -->
-   <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
    <div class="container-fluid">
      <div class="navbar-header">
-       <a class="navbar-brand" href="#">
+       <a class="navbar-brand display-stores" href="#">
          <img alt="Grocery-Basket" src="...">
        </a>
      </div>
-
+      <!-- Navbar Links -->
      <ul class="nav navbar-nav">
-          <button href='#' id='sign-in' class ='modal-display auth-modal btn btn-default navbar-btn'>Login</button>
-          <button href='#' id='sign-out' class ='signout btn btn-default navbar-btn hidden'>Log Out</button>
-      </ul>
-
-     <ul class="nav nav-pills navbar-right" role="tablist">
-        <li role="presentation">
-          <a href='#'class="cart-modal">My Cart <span class="badge items-count">0</span></a>
-        </li>
-        <p class="navbar-text"></p>
-      </ul>
+        <li class='display-stores'><a href="#">Stores</a></li>
+     </ul>
+     <!-- Navbar Auth Links -->
+    <ul class="nav navbar-nav navbar-right">
+      <button href='#' id='sign-in' class ='modal-display auth-modal btn btn-default navbar-btn'>Login</button>
+      <li class="dropdown auth-menu hidden">
+         <a href="#" class="dropdown-toggle username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+         <ul class="dropdown-menu">
+          <li>
+            <a href='#' id='sign-out' class ='signout'>Log Out</a>
+          </li>
+          <li>
+            <a href='#' id='change-password' class ='auth-modal'> Change Password </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
    </div>
   </nav>
+
+  <!-- cart button -->
+  <button href='#'class="cart-modal btn btn-danger">My Cart <span class="badge items-count">0</span></button>
+
+  <!-- Loader -->
+    <div id="loader" class = 'loader'></div>
+
   <!-- Display main content -->
    <div id='content' class='container'></div>
+
   <!-- Modal for displaying authorization forms -->
     <div class="modal fade auth">
       <div class="modal-dialog" role="document">
@@ -75,9 +91,9 @@
             <form class='change-password'>
                <label for='oldPass'>Current Password</label>
                <input id = 'oldPass' class='form-control' name="passwords[old]" type='password' placeholder="old password">
-               <label for='newPass'>Current Password</label>
+               <label for='newPass'>New Password</label>
                <input id = 'newPass' name="passwords[new]" class='form-control' type='password' placeholder="new password">
-               <button class='btn btn-primary' id='change-pass-btn' type='submit'>Submit</button>
+               <button class='btn btn-primary changepass' id='change-pass-btn' type='submit'>Submit</button>
             </form>
             <div class='formerror formerror-auth alert alert-danger' role="alert"></div>
           </div>
@@ -89,6 +105,7 @@
         </div>
       </div>
     </div>
+
   <!-- Modal for displaying cart items -->
     <div class="modal fade cart">
       <div class="modal-dialog" role="document">

@@ -24,6 +24,7 @@ const onSignIn = function (event) {
 }
 
 const onChangePassword = function (event) {
+  console.log('hello')
   event.preventDefault()
   const data = getFormFields(event.target)
   api.changePassword(data)
@@ -41,13 +42,13 @@ const onSignout = function (event) {
 // Signout User
   api.signout()
     .then(ui.signoutSuccess)
-    .catch(ui.sigsnoutFail)
+    .catch(ui.signoutFail)
 }
 
 // Stores Events
 const onGetStores = () => {
   api.GetStores()
-    .then(ui.GetStoreSuccess)
+    .then(ui.GetStoreSuccess, ui.loader(false, '.store-view'))
     .catch(ui.Fail)
 }
 
@@ -64,4 +65,5 @@ module.exports = {
   onGetStores,
   onModal,
   onCartModal,
+  loader
 }

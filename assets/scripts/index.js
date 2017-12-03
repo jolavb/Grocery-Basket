@@ -15,8 +15,11 @@ $(() => {
   // Register Event to Show Form Modal
   $('.auth-modal').on('click', events.onModal)
   $('.cart-modal').on('click', events.onCartModal)
-  // Load Stores Event
+
+  // Load Stores Events
   events.onGetStores()
+  // $('.display-stores').on('click', events.onGetStores)
+  // $('.display-stores').on('click', events.onGetStores)
 })
 
 // use require with a reference to bundle the file and use it in this file
