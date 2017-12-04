@@ -247,11 +247,9 @@ const updateCartSuccess = function (cartItems) {
 
     api.addCartItemQuantity(cartItem.attr('data-id'), quantity)
       .then(
-        function (response) {
-          cartItem.siblings('p').text(response.cart_item.quantity)
-        }
+        function (response) {cartItem.siblings('p').text(response.cart_item.quantity)}
       )
-      .catch(errorHandle('Error Adding Item Quantity'))
+      .catch()
   })
 }
 const updateCartFail = function (response) {

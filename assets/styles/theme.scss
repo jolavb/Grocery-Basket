@@ -25,6 +25,26 @@ form {
 }
 
 
+// Basket
+
+.cart-items {
+  text-align: center;
+}
+
+.cart-item > td {
+  vertical-align: middle !important;
+}
+
+.quantity {
+  > p {
+    display: inline;
+  }
+
+  > button {
+    border-radius: 100%;
+  }
+}
+
 
 // Items
 .item-photo {
