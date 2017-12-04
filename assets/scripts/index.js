@@ -3,9 +3,14 @@
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 const events = require('./bin/events')
+const ui = require('./bin/ui')
+
+
+
 
 $(() => {
   setAPIOrigin(location, config)
+  $('body').show()
   // Register Authorization Events
   $('.registration').on('submit', events.onRegistration)
   $('.sign-in').on('submit', events.onSignIn)
@@ -15,6 +20,7 @@ $(() => {
   // Register Event to Show Form Modal
   $('.auth-modal').on('click', events.onModal)
   $('.cart-modal').on('click', events.onCartModal)
+
 
   // Load Stores Events
   events.onGetStores()
