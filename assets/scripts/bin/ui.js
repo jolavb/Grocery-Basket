@@ -119,7 +119,7 @@ const GetStoreSuccess = (data) => {
 // Display items on success
 const GetItemsSuccess = function (data) {
   const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
-
+  console.log(data)
   // Render Store Items
   $('.items-view').remove()
   $('#content').append(showStoreItemsHTML)
