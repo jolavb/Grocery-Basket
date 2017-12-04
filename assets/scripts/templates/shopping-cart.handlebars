@@ -8,7 +8,7 @@
   <tbody>
     {{#each cartItems as | cartItem |}}
     <tr class = 'cart-item' data-id= {{cartItem.id}}>
-      <td> <button class='cart-btn-remove btn btn-mini btn-success glyphicon glyphicon-remove' data-id = {{ cartItem.item.id }}>Remove</button></td>
+      <td> <button class='cart-btn-remove' data-id = {{ cartItem.item.id }}>Remove</button></td>
       <td>{{ cartItem.item.quantity }}</td>
       <td>{{ cartItem.item.title }}</td>
       <td>${{ cartItem.item.price}}</td>
@@ -16,6 +16,7 @@
         <p>{{cartItem.quantity}}</p>
         <button data-id = {{ cartItem.item.id }} class= 'cart-btn-add btn btn-mini btn-success glyphicon glyphicon-plus'></button>
       </td>
+      <!-- <td> <input type='text' placeholder="{{cartItem.quantity}}"></input></td> -->
     </tr>
     {{/each}}
     <tr>
