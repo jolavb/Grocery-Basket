@@ -7,11 +7,17 @@ const showStoresTemplate = require('../templates/store-listing.handlebars')
 const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
 const showCartTemplate = require('../templates/shopping-cart.handlebars')
 
+// General Error
+const errorHandle = function (message) {
+  $('.error').html(message)
+}
+
 // Auth Modal Form Error
 const showError = function (msg) {
   $('.formerror-auth').html(msg)
   $('.formerror-auth').removeClass('hidden')
 }
+
 
 // Auth Modal Controls
 const showModal = function (formClass) {
@@ -30,30 +36,37 @@ const showModal = function (formClass) {
   $('.auth').modal('show')
 }
 
+
+
 // Cart Modal Controls
 const showCartModal = function () {
   $('.cart').modal('show')
 }
 
-const Success = (response) => {
-
-}
-
 const Fail = (response) => {
-  console.log(response)
+  errorHandle('Error')
 }
+
+const clearForms = function () {
+  $('input').val('')
+}
+
 
 const signUpSuccess = function (response) {
+  clearForms()
   showModal('sign-in')
 }
 
 const signUpFail = function (response) {
+  clearForms()
   showError('Error Signing Up')
 }
 
 const signInSuccess = function (response) {
+  clearForms()
   store.user = response.user
   $('.modal').modal('hide')
+
 
   // Initialize Empty Cart
   const showCartHtml = showCartTemplate()
@@ -68,14 +81,17 @@ const signInSuccess = function (response) {
 }
 
 const signInFail = function (response) {
+  clearForms()
   showError('Error Signing In :(')
 }
 
+
 const changePassSuccess = function (response) {
+  clearForms()
 // Delete Users Current Cart Items
   api.removeAllCartItems()
     .then(updateCartSuccess)
-    .catch(Success)
+    .catch(errorHandle('Error Removing All Cart Items'))
 
 // Signout User
   api.signout()
@@ -84,10 +100,12 @@ const changePassSuccess = function (response) {
 }
 
 const changePassFail = function (response) {
+  clearForms()
   showError('Error changing passwords')
 }
 
 const signoutSuccess = function (response) {
+  clearForms()
   $('.username').html('<span class="caret"></span>')
   $('#sign-in').removeClass('hidden')
   $('.auth-menu').addClass('hidden')
@@ -98,8 +116,11 @@ const signoutSuccess = function (response) {
 }
 
 const signoutFail = function (response) {
+  clearForms()
+  errorHandle('Error Removing All Cart Items')
   $('.formerror').html('Error Signing out')
 }
+
 
 const GetStoreSuccess = (data) => {
   // Render Stores Template to content to display stores
@@ -116,10 +137,13 @@ const GetStoreSuccess = (data) => {
   })
 }
 
+const GetStoreSuccessFail = function () {
+  errorHandle('Error Retrieving Stores')
+}
+
 // Display items on success
 const GetItemsSuccess = function (data) {
   const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
-  console.log(data)
   // Render Store Items
   $('.items-view').remove()
   $('#content').append(showStoreItemsHTML)
@@ -149,6 +173,10 @@ const GetItemsSuccess = function (data) {
   CheckAuth()
   // Initilize Add Items Image Buttons if items added to cart
   CheckItems(data)
+}
+
+const GetItemsFail = function (response) {
+  errorHandle('Error Retrieving Items')
 }
 
 // Check if list item has already been added and changes
@@ -191,9 +219,6 @@ const changeItemGlyph = function (item, reset) {
   }
 }
 
-const GetItemsFail = function (response) {
-  console.log(GetItemsFail)
-}
 
 // Update Cart Items on success
 const updateCartSuccess = function (cartItems) {
@@ -224,21 +249,24 @@ const updateCartSuccess = function (cartItems) {
       .then(
         function (response) {
           cartItem.siblings('p').text(response.cart_item.quantity)
-          console.log(response)
         }
       )
-      .catch(function (response) { console.log(response) })
+      .catch(errorHandle('Error Adding Item Quantity'))
   })
+}
+const updateCartFail = function (response) {
+  errorHandle('Error Updating Cart')
 }
 
 const addItemFail = function (response) {
-  console.log(response)
+  errorHandle('Error Adding to Basket')
 }
 
 const RemoveItemFail = function (response) {
-  console.log(response)
+  errorHandle('Error Removing from Basket')
 }
 
+// To Do
 const CalculateExpenses = function (cartItems) {
   // console.log(JSON.parse(cartItems))
 }
@@ -277,11 +305,12 @@ module.exports = {
   changePassFail,
   signoutSuccess,
   signoutFail,
-  Success,
   Fail,
   GetStoreSuccess,
   showModal,
   showCartModal,
   updateCartSuccess,
-  loader
+  loader,
+  updateCartFail,
+  GetStoreSuccessFail
 }

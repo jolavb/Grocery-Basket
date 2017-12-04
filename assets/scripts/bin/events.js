@@ -24,7 +24,6 @@ const onSignIn = function (event) {
 }
 
 const onChangePassword = function (event) {
-  console.log('hello')
   event.preventDefault()
   const data = getFormFields(event.target)
   api.changePassword(data)
@@ -37,7 +36,7 @@ const onSignout = function (event) {
 // Delete Users Current Cart Items
   api.removeAllCartItems()
     .then(ui.updateCartSuccess)
-    .catch(ui.Success)
+    .catch(ui.updateCartFail)
 
 // Signout User
   api.signout()
@@ -49,7 +48,7 @@ const onSignout = function (event) {
 const onGetStores = () => {
   api.GetStores()
     .then(ui.GetStoreSuccess, ui.loader(false, '.store-view'))
-    .catch(ui.Fail)
+    .catch(ui.GetStoreSuccessFail)
 }
 
 // Cart Events

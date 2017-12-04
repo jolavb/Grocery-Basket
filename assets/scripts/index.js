@@ -18,8 +18,6 @@ $(() => {
 
   // Load Stores Events
   events.onGetStores()
-  // $('.display-stores').on('click', events.onGetStores)
-  // $('.display-stores').on('click', events.onGetStores)
 })
 
 // use require with a reference to bundle the file and use it in this file
