@@ -6,8 +6,6 @@ const events = require('./bin/events')
 const ui = require('./bin/ui')
 
 
-
-
 $(() => {
   setAPIOrigin(location, config)
   $('body').show()
@@ -20,7 +18,6 @@ $(() => {
   // Register Event to Show Form Modal
   $('.auth-modal').on('click', events.onModal)
   $('.cart-modal').on('click', events.onCartModal)
-
 
   // Load Stores Events
   events.onGetStores()

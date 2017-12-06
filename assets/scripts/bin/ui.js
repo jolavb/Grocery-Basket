@@ -37,7 +37,6 @@ const showModal = function (formClass) {
 }
 
 
-
 // Cart Modal Controls
 const showCartModal = function () {
   $('.cart').modal('show')
@@ -50,7 +49,6 @@ const Fail = (response) => {
 const clearForms = function () {
   $('input').val('')
 }
-
 
 const signUpSuccess = function (response) {
   clearForms()
@@ -85,15 +83,14 @@ const signInFail = function (response) {
   showError('Error Signing In :(')
 }
 
-
 const changePassSuccess = function (response) {
   clearForms()
-// Delete Users Current Cart Items
+  // Delete Users Current Cart Items
   api.removeAllCartItems()
     .then(updateCartSuccess)
-    .catch(errorHandle('Error Removing All Cart Items'))
+    .catch(updateCartFail)
 
-// Signout User
+    // Signout User
   api.signout()
     .then(signoutSuccess)
     .catch(signoutFail)
@@ -101,7 +98,7 @@ const changePassSuccess = function (response) {
 
 const changePassFail = function (response) {
   clearForms()
-  showError('Error changing passwords')
+  showError('Error Changing Password')
 }
 
 const signoutSuccess = function (response) {
@@ -117,10 +114,8 @@ const signoutSuccess = function (response) {
 
 const signoutFail = function (response) {
   clearForms()
-  errorHandle('Error Removing All Cart Items')
   $('.formerror').html('Error Signing out')
 }
-
 
 const GetStoreSuccess = (data) => {
   // Render Stores Template to content to display stores
@@ -175,6 +170,13 @@ const GetItemsSuccess = function (data) {
   CheckItems(data)
 }
 
+
+const OnItemSearch = function () {
+  $('')
+}
+
+
+
 const GetItemsFail = function (response) {
   errorHandle('Error Retrieving Items')
 }
@@ -219,7 +221,6 @@ const changeItemGlyph = function (item, reset) {
   }
 }
 
-
 // Update Cart Items on success
 const updateCartSuccess = function (cartItems) {
   $('.items-count').html(cartItems.cart_items.length)
@@ -252,6 +253,7 @@ const updateCartSuccess = function (cartItems) {
       .catch()
   })
 }
+
 const updateCartFail = function (response) {
   errorHandle('Error Updating Cart')
 }
