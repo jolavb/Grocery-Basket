@@ -173,7 +173,7 @@ const GetItemsSuccess = function (data) {
 }
 
 const itemSearch = function () {
-  $('#ItemSearch').on('keyup', function () {
+  $('.ItemSearch').on('keyup', function () {
     const filter = $(this).val().toUpperCase()
     $('.panel-title').each(function () {
       if ($(this).html().toUpperCase().indexOf(filter) > -1) {
