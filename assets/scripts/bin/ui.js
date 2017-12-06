@@ -168,14 +168,22 @@ const GetItemsSuccess = function (data) {
   CheckAuth()
   // Initilize Add Items Image Buttons if items added to cart
   CheckItems(data)
+  // Initialize Seach Action
+  itemSearch()
 }
 
-
-const OnItemSearch = function () {
-  $('')
+const itemSearch = function () {
+  $('#ItemSearch').on('keyup', function () {
+    const filter = $(this).val().toUpperCase()
+    $('.panel-title').each(function () {
+      if ($(this).html().toUpperCase().indexOf(filter) > -1) {
+        $(this).parents('.itemcol').show()
+      } else {
+        $(this).parents('.itemcol').hide()
+      }
+    })
+  })
 }
-
-
 
 const GetItemsFail = function (response) {
   errorHandle('Error Retrieving Items')

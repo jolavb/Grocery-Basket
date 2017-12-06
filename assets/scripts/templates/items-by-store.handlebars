@@ -5,10 +5,10 @@
   <p> {{items.1.store.location}}</p>
   <p> On Sale From {{items.1.start_date}} to {{items.1.end_date}} </p>
 
-
+<input type="text" id="ItemSearch" placeholder="Search Items">
 <div class = 'row items'>
   {{#each items as | item |}}
-  <div class='col-md-3 col-xs-6'>
+  <div class='col-md-3 col-xs-6 itemcol'>
       <div class="item panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">{{ item.title }}</h2>
