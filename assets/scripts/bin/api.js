@@ -59,7 +59,15 @@ const GetStores = function () {
 const GetStoreItems = function (storeId) {
   return $.ajax({
     method: 'GET',
-    url: config.apiOrigin + '/stores/' + storeId,
+    url: config.apiOrigin + '/stores/' + storeId + '/items',
+    contentType: 'application/json'
+  })
+}
+
+const GetStoreRecipes = function (storeId) {
+  return $.ajax({
+    method: 'GET',
+    url: config.apiOrigin + '/stores/' + storeId + '/recipes',
     contentType: 'application/json'
   })
 }
@@ -139,5 +147,6 @@ module.exports = {
   addItemToCart,
   removeCartItem,
   removeAllCartItems,
-  addCartItemQuantity
+  addCartItemQuantity,
+  GetStoreRecipes
 }

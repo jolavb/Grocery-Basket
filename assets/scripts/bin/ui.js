@@ -6,6 +6,8 @@ const events = require('./events')
 const showStoresTemplate = require('../templates/store-listing.handlebars')
 const showStoreItemsTemplate = require('../templates/items-by-store.handlebars')
 const showCartTemplate = require('../templates/shopping-cart.handlebars')
+const showStoreView = require('../templates/store-view.handlebars')
+const showStoreRecipesTemplate = require('../templates/recipes-by-store.handlebars')
 
 // General Error
 const errorHandle = function (message) {
@@ -138,15 +140,22 @@ const GetStoreSuccessFail = function () {
 
 // Display items on success
 const GetItemsSuccess = function (data) {
+  store.StoreId = data.items[0].store.id
   const showStoreItemsHTML = showStoreItemsTemplate({ items: data.items })
+  const showStoreViewHTML = showStoreView({ items: data.items })
+
   // Render Store Items
   $('.items-view').remove()
-  $('#content').append(showStoreItemsHTML)
+  $('#content').append(showStoreViewHTML)
+  $('.items-view').append(showStoreItemsHTML)
 
   // Reigster Display Stores Event for Nav Links
   $('.display-stores').on('click', function () { switchView('.store-view') })
   // Turn Off Loader and Switch Views
   loader(false, '.items-view')
+
+  //Register Toggle Events
+  $('.sale-view').on('click', 'li', switchSaleView)
 
   // Register event that adds items to cart on item list add click
   $('.items').on('click', 'button', function () {
@@ -169,8 +178,44 @@ const GetItemsSuccess = function (data) {
   // Initilize Add Items Image Buttons if items added to cart
   CheckItems(data)
   // Initialize Seach Action
+  $('.ItemSearch').attr('placeholder', 'Search Items')
   itemSearch()
 }
+
+
+const switchSaleView = function () {
+  if (!$(this).hasClass('active')) {
+    $('li').removeClass('active')
+    $(this).addClass('active')
+    $('.items').remove()
+
+    switch ($(this).attr('id')) {
+      case 'sale-items':
+        api.GetStoreItems(store.StoreId)
+          .then(GetItemsSuccess)
+          .catch(GetItemsFail)
+        break
+
+      case 'sale-recipes':
+        api.GetStoreRecipes(store.StoreId)
+          .then(GetRecipesSuccess)
+          .catch(GetRecipesFail)
+        break
+    }
+  }
+}
+
+
+const GetRecipesSuccess = function (data) {
+  const showRecipeHTML = showStoreRecipesTemplate({'recipes': data.recipes})
+  $('.items-view').append(showRecipeHTML)
+  $('.ItemSearch').attr('placeholder', 'Search Recipes')
+}
+
+const GetRecipesFail = function () {
+  errorHandle('Error Retrieving Recipes')
+}
+
 
 const itemSearch = function () {
   $('.ItemSearch').on('keyup', function () {

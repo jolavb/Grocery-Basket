@@ -1,0 +1,19 @@
+<div class = 'row items'>
+  {{#each recipes as | recipe |}}
+  <div class='col-md-3 col-xs-6 itemcol'>
+      <div class="item panel panel-default">
+        <div class="panel-heading">
+          <p class="panel-title truncate">{{ recipe.title }}</p>
+        </div>
+        <div class='item-photo'>
+          <img src="{{ recipe.image }}" class = 'img' height='200px' >
+        </div>
+        </a>
+          <button data-id="{{ recipe.id }}"
+          class="item-btn btn btn-mini btn-success glyphicon glyphicon-plus"
+          type="button">
+          </button>
+          <p> Used Sale Ingredients: {{recipe.usedIngredientCount}}</p>
+      </div>
+    </div>
+  {{/each}}

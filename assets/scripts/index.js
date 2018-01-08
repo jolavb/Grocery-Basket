@@ -19,6 +19,7 @@ $(() => {
   $('.auth-modal').on('click', events.onModal)
   $('.cart-modal').on('click', events.onCartModal)
 
+
   // Load Stores Events
   events.onGetStores()
 })
