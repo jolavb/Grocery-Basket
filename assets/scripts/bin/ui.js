@@ -132,6 +132,7 @@ const GetStoreSuccess = (data) => {
       .then(GetItemsSuccess)
       .catch(GetItemsFail)
   })
+  return data
 }
 
 const GetStoreSuccessFail = function () {

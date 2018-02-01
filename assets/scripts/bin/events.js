@@ -1,6 +1,7 @@
 const getFormFields = require('./../../../lib/get-form-fields')
 const api = require('./api.js')
 const ui = require('./ui.js')
+const map = require('./maps.js')
 
 // Authentication Events
 const onModal = (event) => {
@@ -48,7 +49,12 @@ const onSignout = function (event) {
 // Stores Events
 const onGetStores = () => {
   api.GetStores()
-    .then(ui.GetStoreSuccess, ui.loader(false, '.store-view'))
+    .then(ui.GetStoreSuccess)
+    .then((data) => {
+      ui.loader(false, '.store-view')
+      return data
+    })
+    .then(map.loadMap)
     .catch(ui.GetStoreSuccessFail)
 }
 

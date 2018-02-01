@@ -4,11 +4,13 @@ const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 const events = require('./bin/events')
 const ui = require('./bin/ui')
-
+const map = require('./bin/maps')
 
 $(() => {
   setAPIOrigin(location, config)
   $('body').show()
+  // Initilize Map
+
   // Register Authorization Events
   $('.registration').on('submit', events.onRegistration)
   $('.sign-in').on('submit', events.onSignIn)
