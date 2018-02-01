@@ -50,7 +50,7 @@ const init = function (gmap, data) {
 const loadMap = function (data) {
   console.log(process.env.GOOGLE_MAPS_KEY)
   const geoData = GeoJSON.parse(data.stores, {Point: ['lat', 'lng']})
-  const options = { key: process.env.GOOGLE_MAPS_KEY }
+  const options = { key: 'AIzaSyAGRlNMq-_hdvBpP2L1ZPPhcJxBhZh4YyY' }
 
   loadGoogleMapsAPI(options)
     .then(function (map) { init(map, geoData) })
