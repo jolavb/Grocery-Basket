@@ -54,7 +54,6 @@ const loadMap = function (data) {
   loadGoogleMapsAPI(options)
     .then(function (map) { init(map, geoData) })
     .catch(console.error)
-  console.log(options)
 }
 
 
