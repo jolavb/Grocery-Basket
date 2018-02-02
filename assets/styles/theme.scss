@@ -1,5 +1,5 @@
 $break-small: 320px;
-$break-large: 470px;
+$break-large: 1370px;
 // body
 
 body {
@@ -39,12 +39,19 @@ form {
   margin-right: 15px;
 
   @media screen and (max-width: $break-large) {
+    background-color: $transred;
     position: sticky;
     top: 0;
     z-index: 99;
     width: 100%;
   }
 }
+
+.img-brand {
+  height: 100%;
+}
+
+
 
 // Items
 

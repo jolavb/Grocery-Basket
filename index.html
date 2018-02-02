@@ -19,16 +19,38 @@
   <nav class="navbar navbar-default">
    <div class="container-fluid">
      <div class="navbar-header">
-       <a class="navbar-brand display-stores" href="#">
-         <img alt="Grocery-Basket" src="...">
-       </a>
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- <img class='img img-responsive img-brand' alt="Grocery-Basket" src="https://cdn0.iconfinder.com/data/icons/shopping-vol-1-2/128/P-1-09-128.png"> -->
+        <a class="navbar-brand" href="#">
+          Grocery-Basket
+        </a>
+
      </div>
       <!-- Navbar Links -->
-     <ul class="nav navbar-nav">
-        <li class='display-stores'><a href="#">Stores</a></li>
-     </ul>
+      <!-- <nav class="navbar navbar-default"> -->
+  <!-- <div class="container-fluid"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div> -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="nav navbar-nav">
+          <li class='display-stores active'><a href="#">Stores</a></li>
+       </ul>
      <!-- Navbar Auth Links -->
-    <ul class="nav navbar-nav navbar-right">
+     <ul class="nav navbar-nav navbar-right">
       <button href='#' id='sign-in' class ='modal-display auth-modal btn btn-default navbar-btn'>Login</button>
       <li class="dropdown auth-menu hidden">
          <a href="#" class="dropdown-toggle username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
@@ -42,11 +64,12 @@
         </ul>
       </li>
     </ul>
+      </div>
    </div>
   </nav>
 
   <!-- cart button -->
-  <button href='#'class="cart-modal btn btn-danger">My Cart <span class="badge items-count">0</span></button>
+  <button class="cart-modal btn btn-danger">My Cart <span class="badge items-count">0</span></button>
 
   <!-- Loader -->
     <div id="loader" class = 'loader'></div>
