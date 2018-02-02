@@ -1,5 +1,6 @@
 $break-small: 320px;
 $break-large: 1370px;
+$break-image: 475px;
 // body
 
 body {
@@ -54,6 +55,12 @@ form {
 
 
 // Items
+
+.col-sm-6 {
+  @media screen and (max-width: $break-image) {
+    width: 100%;
+  }
+}
 
 .price-desc {
   margin-bottom: 5px;
