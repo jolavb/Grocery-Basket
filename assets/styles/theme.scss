@@ -42,11 +42,23 @@ form {
   @media screen and (max-width: $break-large) {
     background-color: $transred;
     position: sticky;
+    position: -webkit-sticky;
     top: 0;
     z-index: 99;
     width: 100%;
   }
 }
+// .cart-modal::after {
+//   @media screen and (max-width: $break-large) {
+//     background-color: $transred;
+//     position: sticky;
+//     position: -webkit-sticky;
+//     top: 0;
+//     z-index: 99;
+//     width: 100%;
+//   }
+// }
+
 
 .img-brand {
   height: 100%;
