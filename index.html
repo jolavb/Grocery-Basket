@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Grocery-Basket</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <link rel="icon" href="https://cdn0.iconfinder.com/data/icons/shopping-vol-1-2/128/P-1-09-128.png">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+
+ <body class="container-fluid">
+
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-default">
+   <div class="container-fluid">
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- <img class='img img-responsive img-brand' alt="Grocery-Basket" src="https://cdn0.iconfinder.com/data/icons/shopping-vol-1-2/128/P-1-09-128.png"> -->
+        <a class="navbar-brand" href="#">
+          Grocery-Basket
+        </a>
+
+     </div>
+      <!-- Navbar Links -->
+      <!-- <nav class="navbar navbar-default"> -->
+  <!-- <div class="container-fluid"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div> -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="nav navbar-nav">
+          <li class='display-stores active'><a href="#">Stores</a></li>
+       </ul>
+     <!-- Navbar Auth Links -->
+     <ul class="nav navbar-nav navbar-right">
+      <button href='#' id='sign-in' class ='modal-display auth-modal btn btn-default navbar-btn'>Login</button>
+      <li class="dropdown auth-menu hidden">
+         <a href="#" class="dropdown-toggle username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+         <ul class="dropdown-menu">
+          <li>
+            <a href='#' id='sign-out' class ='signout'>Log Out</a>
+          </li>
+          <li>
+            <a href='#' id='change-password' class ='auth-modal'> Change Password </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+      </div>
+   </div>
+  </nav>
+
+  <!-- cart button -->
+  <button class="cart-modal btn btn-danger">My Cart <span class="badge items-count">0</span></button>
+
+  <!-- Loader -->
+    <div id="loader" class = 'loader'></div>
+
+  <!-- Display main content -->
+   <div class='error'></div>
+   <div id='content' class='container'></div>
+
+  <!-- Modal for displaying authorization forms -->
+    <div class="modal fade auth">
+      <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title modal-title-auth"></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+
+            <form class='registration'>
+              <label for="RegEmail">Email address</label>
+              <input id = 'RegEmail' class='form-control' name="credentials[email]" type= 'text' placeholder="email">
+              <label for="RegPass1">Password</label>
+              <input id = 'RegPass1' class='form-control' name="credentials[password]" type="password" placeholder="password">
+              <label for="RegPass2">Confirm Password</label>
+              <input id = "RegPass2" class='form-control' name="credentials[password_confirmation]" type="password" placeholder="re-enter password">
+              <button class = 'submit btn btn-primary' type='submit' >Sign Up</button>
+            </form>
+
+            <form class= 'sign-in'>
+              <label for='LogEmail'>Email address</label>
+              <input id = 'LogEmail' class='form-control' name="credentials[email]" type='text' placeholder="email">
+              <label for='LogPass'>Password</label>
+              <input id = 'LogPass' class='form-control' name="credentials[password]" type='password' placeholder="password">
+              <button class = 'btn btn-primary' type='submit'>Sign In</button>
+              <button id='registration' type='button' class ='modal-display auth-modal nav-item btn btn-primary'>Sign Up</button>
+            </form>
+
+            <form class='change-password'>
+               <label for='oldPass'>Current Password</label>
+               <input id = 'oldPass' class='form-control' name="passwords[old]" type='password' placeholder="old password">
+               <label for='newPass'>New Password</label>
+               <input id = 'newPass' name="passwords[new]" class='form-control' type='password' placeholder="new password">
+               <button class='btn btn-primary changepass' id='change-pass-btn' type='submit'>Submit</button>
+            </form>
+            <div class='formerror formerror-auth alert alert-danger' role="alert"></div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  <!-- Modal for displaying cart items -->
+    <div class="modal fade cart">
+      <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">My Cart</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div id = 'shopping-cart'></div>
+            <div class='formerror formerror-cart alert alert-danger' role="alert">
+              <p>Please Sign in to Add Items to Cart</p>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
